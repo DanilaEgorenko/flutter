@@ -11,9 +11,9 @@ class LoginScreen extends StatelessWidget {
     final TextEditingController passwordController = TextEditingController();
 
     return Scaffold(
-      backgroundColor: Colors.pink.shade50,
+      backgroundColor: Colors.deepOrange.shade50,
       appBar: AppBar(
-        backgroundColor: Colors.pink.shade50,
+        backgroundColor: Colors.deepOrange.shade50,
         title: Text('Login'),
       ),
       body: Padding(
@@ -21,9 +21,7 @@ class LoginScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-                'Welcome!',
-                style: const TextStyle(fontSize: 20.0)),
+            Text('Welcome!', style: const TextStyle(fontSize: 20.0)),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15.0),
               child: TextField(
@@ -33,14 +31,15 @@ class LoginScreen extends StatelessWidget {
                     fillColor: Colors.white,
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide(color: Colors.deepOrange.shade400, width: 2.0),
+                      borderSide:
+                          BorderSide(color: Colors.green.shade400, width: 2.0),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide(color: Colors.deepOrange.shade400, width: 2.0),
+                      borderSide:
+                          BorderSide(color: Colors.green.shade400, width: 2.0),
                     ),
-                    labelText: 'Username'
-                ),
+                    labelText: 'Username'),
               ),
             ),
             TextField(
@@ -51,11 +50,13 @@ class LoginScreen extends StatelessWidget {
                   fillColor: Colors.white,
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(color: Colors.deepOrange.shade400, width: 2.0),
+                    borderSide:
+                        BorderSide(color: Colors.green.shade400, width: 2.0),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(color: Colors.deepOrange.shade400, width: 2.0),
+                    borderSide:
+                        BorderSide(color: Colors.green.shade400, width: 2.0),
                   ),
                   labelText: 'Password'),
             ),
@@ -72,16 +73,17 @@ class LoginScreen extends StatelessWidget {
                 ));
               },
               child: Text('Login'),
-
               style: ButtonStyle(
                 shape: MaterialStateProperty.all<OutlinedBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.deepOrange.shade400),
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(Colors.green.shade400),
                 foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                overlayColor: MaterialStateProperty.all<Color>(Colors.deepOrange.shade200),
+                overlayColor:
+                    MaterialStateProperty.all<Color>(Colors.deepOrange.shade50),
                 textStyle: MaterialStateProperty.all<TextStyle>(
                   TextStyle(
                     fontSize: 16.0,

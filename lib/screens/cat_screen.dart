@@ -11,11 +11,6 @@ class CatScreen extends StatefulWidget {
 }
 
 class _CatScreenState extends State<CatScreen> {
-  void initState() {
-    super.initState();
-    context.read<CatCubit>().loadCatImage();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -34,16 +29,17 @@ class _CatScreenState extends State<CatScreen> {
                   builder: (context, imageUrl) {
                     return imageUrl.isNotEmpty
                         ? Image.network(
-                      imageUrl,
-                      fit: BoxFit.contain,
-                    ) : Align(
-                      alignment: Alignment.center,
-                      child: Container(
-                        width: 50,
-                        height: 50,
-                        child: CircularProgressIndicator(),
-                      ),
-                    );
+                            imageUrl,
+                            fit: BoxFit.contain,
+                          )
+                        : Align(
+                            alignment: Alignment.center,
+                            child: Container(
+                              width: 50,
+                              height: 50,
+                              child: CircularProgressIndicator(),
+                            ),
+                          );
                   },
                 ),
               ),
@@ -54,9 +50,43 @@ class _CatScreenState extends State<CatScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     ElevatedButton.icon(
+                      onPressed: () {
+                        context.read<CatCubit>().loadCatImage();
+                      },
+                      icon: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 15.0),
+                        child: Icon(
+                          Icons.arrow_forward,
+                          size: 35,
+                        ),
+                      ),
+                      label: Text('Следующий'),
+                      style: ButtonStyle(
+                        shape: MaterialStateProperty.all<OutlinedBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Colors.red.shade300),
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white),
+                        overlayColor: MaterialStateProperty.all<Color>(
+                            Colors.red.shade100),
+                        textStyle: MaterialStateProperty.all<TextStyle>(
+                          TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                    ElevatedButton.icon(
                       onPressed: () async {
                         String catId = context.read<CatCubit>().state;
-                        var favoriteCatsCubit = context.read<FavoriteCatsCubit>();
+                        var favoriteCatsCubit =
+                            context.read<FavoriteCatsCubit>();
 
                         if (favoriteCatsCubit.state.contains(catId)) {
                           favoriteCatsCubit.removeFromFavorites(catId);
@@ -73,56 +103,30 @@ class _CatScreenState extends State<CatScreen> {
                               bool isFavorite = favoriteCats.contains(catId);
 
                               return Icon(
-                                isFavorite ? Icons.favorite : Icons.favorite_border,
+                                isFavorite
+                                    ? Icons.favorite
+                                    : Icons.favorite_border,
                                 size: 35,
                                 color: isFavorite ? Colors.white : null,
                               );
                             },
-                          )
-                      ),
-                      label: Text('Like'),
+                          )),
+                      label: Text('Нравится'),
                       style: ButtonStyle(
                         shape: MaterialStateProperty.all<OutlinedBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                         ),
-                        backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
-                        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                        overlayColor: MaterialStateProperty.all<Color>(Colors.green.shade300),
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Colors.green.shade300),
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white),
+                        overlayColor: MaterialStateProperty.all<Color>(
+                            Colors.green.shade100),
                         textStyle: MaterialStateProperty.all<TextStyle>(
                           TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                    ElevatedButton.icon(
-                      onPressed: () {
-                        context.read<CatCubit>().loadCatImage();
-                      },
-                      icon: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 15.0),
-                        child: Icon(
-                          Icons.not_interested,
-                          size: 35,
-                        ),
-                      ),
-                      label: Text('Next'),
-                      style: ButtonStyle(
-                        shape: MaterialStateProperty.all<OutlinedBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                        ),
-                        backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
-                        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                        overlayColor: MaterialStateProperty.all<Color>(Colors.red.shade300),
-                        textStyle: MaterialStateProperty.all<TextStyle>(
-                          TextStyle(
-                            fontSize: 20.0,
+                            fontSize: 16.0,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
@@ -137,6 +141,11 @@ class _CatScreenState extends State<CatScreen> {
         ),
       ),
     );
+  }
+
+  void initState() {
+    super.initState();
+    context.read<CatCubit>().loadCatImage();
   }
 
   void _openCatHeroImage(BuildContext context) {

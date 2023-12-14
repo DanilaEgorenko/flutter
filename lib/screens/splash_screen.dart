@@ -11,7 +11,8 @@ import 'login_screen.dart';
 class SplashScreen extends StatefulWidget {
   final VoidCallback onSplashScreenComplete;
 
-  SplashScreen({Key? key, required this.onSplashScreenComplete}) : super(key: key);
+  SplashScreen({Key? key, required this.onSplashScreenComplete})
+      : super(key: key);
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -19,14 +20,25 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.deepOrange.shade50,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('assets/splashscreen_logo.png',
+                width: 150, height: 150),
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
   void initState() {
     super.initState();
     _checkAuthenticationStatus();
-  }
-
-  Future<bool> _checkInternetConnection() async {
-    var connectivityResult = await Connectivity().checkConnectivity();
-    return connectivityResult != ConnectivityResult.none;
   }
 
   Future<void> _checkAuthenticationStatus() async {
@@ -36,9 +48,11 @@ class _SplashScreenState extends State<SplashScreen> {
     if (isConnected) {
       final authStatus = context.read<AuthenticationCubit>().state;
       if (authStatus == AuthenticationStatus.authenticated) {
-        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => HomeScreen()));
       } else {
-        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginScreen()));
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => LoginScreen()));
       }
     } else {
       showDialog(
@@ -60,18 +74,8 @@ class _SplashScreenState extends State<SplashScreen> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.pink.shade50,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset('assets/splashscreen_logo.png', width: 150, height: 150),
-          ],
-        ),
-      ),
-    );
+  Future<bool> _checkInternetConnection() async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+    return connectivityResult != ConnectivityResult.none;
   }
 }

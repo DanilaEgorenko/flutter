@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:mobile_dev/cubits/authentication_cubit.dart';
 import 'package:mobile_dev/cubits/cat_cubit.dart';
 import 'package:mobile_dev/cubits/favorite_cats_cubit.dart';

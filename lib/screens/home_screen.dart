@@ -11,7 +11,8 @@ import 'login_screen.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final AuthenticationStatus authStatus = context.watch<AuthenticationCubit>().state;
+    final AuthenticationStatus authStatus =
+        context.watch<AuthenticationCubit>().state;
     if (authStatus == AuthenticationStatus.unauthenticated) {
       return LoginScreen();
     }
@@ -19,9 +20,9 @@ class HomeScreen extends StatelessWidget {
     return BlocBuilder<CatCubit, String>(
       builder: (context, catState) {
         return Scaffold(
-          backgroundColor: Colors.pink.shade50,
+          backgroundColor: Colors.deepOrange.shade50,
           appBar: AppBar(
-            backgroundColor: Colors.pink.shade50,
+            backgroundColor: Colors.deepOrange.shade50,
             title: Text('Cat tinder'),
             actions: [
               Padding(
@@ -37,9 +38,12 @@ class HomeScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.deepOrange.shade400),
-                    foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                    overlayColor: MaterialStateProperty.all<Color>(Colors.deepOrange.shade200),
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.green.shade400),
+                    foregroundColor:
+                        MaterialStateProperty.all<Color>(Colors.white),
+                    overlayColor: MaterialStateProperty.all<Color>(
+                        Colors.deepOrange.shade50),
                     textStyle: MaterialStateProperty.all<TextStyle>(
                       TextStyle(
                         fontSize: 16.0,
@@ -58,7 +62,8 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Expanded(
                       child: IndexedStack(
-                        index: context.select((HomeScreenCubit cubit) => cubit.state),
+                        index: context
+                            .select((HomeScreenCubit cubit) => cubit.state),
                         children: [
                           CatScreen(),
                           FavoriteScreen(),
@@ -85,7 +90,7 @@ class HomeScreen extends StatelessWidget {
             onTap: (index) {
               context.read<HomeScreenCubit>().setSelectedIndex(index);
             },
-            backgroundColor: Colors.deepOrange.shade400,
+            backgroundColor: Colors.green.shade400,
             iconSize: 30,
             mouseCursor: SystemMouseCursors.click,
             selectedItemColor: Colors.white,

@@ -12,56 +12,64 @@ class FavoriteScreen extends StatelessWidget {
         return Scaffold(
           body: Center(
             child: favoriteCats.isEmpty
-                ? Text('No favorite cats')
+                ? Text('Нет избранных')
                 : GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 8.0,
-                mainAxisSpacing: 8.0,
-              ),
-              itemCount: favoriteCats.length,
-              itemBuilder: (context, index) {
-                return GridTile(
-                  child: GestureDetector(
-                    onTap: () {
-                      _openCatHeroImage(context, favoriteCats[index]);
-                    },
-                    child: _buildCatImage(context, favoriteCats[index]),
-                  ),
-                  footer: SizedBox(
-                    width: 80,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: ElevatedButton.icon(
-                        onPressed: () async {
-                          String catId = favoriteCats[index];
-                          context.read<FavoriteCatsCubit>().removeFromFavorites(catId);
-                        },
-                        icon: Icon(Icons.not_interested),
-                        label: Text('Unlike'),
-                        style: ButtonStyle(
-                          shape: MaterialStateProperty.all<OutlinedBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                          ),
-                          backgroundColor: MaterialStateProperty.all<Color>(Colors.red.shade400),
-                          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                          overlayColor: MaterialStateProperty.all<Color>(Colors.red.shade300),
-                          textStyle: MaterialStateProperty.all<TextStyle>(
-                            TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 8.0,
+                      mainAxisSpacing: 8.0,
+                    ),
+                    itemCount: favoriteCats.length,
+                    itemBuilder: (context, index) {
+                      return GridTile(
+                        child: GestureDetector(
+                          onTap: () {
+                            _openCatHeroImage(context, favoriteCats[index]);
+                          },
+                          child: _buildCatImage(context, favoriteCats[index]),
+                        ),
+                        footer: SizedBox(
+                          width: 80,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: ElevatedButton.icon(
+                              onPressed: () async {
+                                String catId = favoriteCats[index];
+                                context
+                                    .read<FavoriteCatsCubit>()
+                                    .removeFromFavorites(catId);
+                              },
+                              icon: Icon(Icons.heart_broken),
+                              label: Text('Не нравится'),
+                              style: ButtonStyle(
+                                shape:
+                                    MaterialStateProperty.all<OutlinedBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                ),
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.red.shade400),
+                                foregroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.white),
+                                overlayColor: MaterialStateProperty.all<Color>(
+                                    Colors.red.shade300),
+                                textStyle: MaterialStateProperty.all<TextStyle>(
+                                  TextStyle(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
           ),
         );
       },
