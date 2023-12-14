@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
           backgroundColor: Colors.deepOrange.shade50,
           appBar: AppBar(
             backgroundColor: Colors.deepOrange.shade50,
-            title: Text('Cat tinder'),
+            title: Text('Егоренко Данила'),
             actions: [
               Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
                   onPressed: () {
                     context.read<AuthenticationCubit>().logoutUser();
                   },
-                  child: Text('Quit'),
+                  child: Text('Выйти'),
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<OutlinedBorder>(
                       RoundedRectangleBorder(
